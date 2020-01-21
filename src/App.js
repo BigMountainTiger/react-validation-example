@@ -5,14 +5,10 @@ const App = () => {
 
   useEffect(() => {
     if (initMountRef.current) { initMountRef.current = false; } else { }
+    console.log('Updated');
   });
 
-  const [inputs, setInputs] = useState({
-    firstName: '',
-    lastName: '',
-    email: ''
-  });
-
+  const [inputs, setInputs] = useState({ firstName: '', lastName: '', email: '' });
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
@@ -58,32 +54,36 @@ const App = () => {
   };
 
   const clear = () => {
-
+    setInputs({ firstName: '', lastName: '', email: '' });
+    setErrors({});
   };
 
   return (
     <div className="log-in">
-        <fieldset>
-          <label>First Name</label>
-          <input type="text" name="firstName" value={inputs.firstName}
-            onFocus={handleChange}
-            onChange={handleChange} />
-          {errors.firstName && <div className="error">{errors.firstName}</div>}
-          <label>Last Name</label>
-          <input type="text" name="lastName" value={inputs.lastName}
-            onFocus={handleChange}
-            onChange={handleChange} />
-          {errors.lastName && <div className="error">{errors.lastName}</div>}
-          <label>Email</label>
-          <input type="text" name="email" value={inputs.email}
-            onFocus={handleChange}
-            onChange={handleChange}/>
-          {errors.email && <div className="error">{errors.email}</div>}
-          <div style={{width: '300px'}}>
-            <button disabled={!isValid()}>Submit</button>
-            <button onClick={clear}>Clear</button>
-          </div>
-        </fieldset>
+      <div>
+        <label>First Name</label>
+        <input type="text" name="firstName" value={inputs.firstName}
+          onFocus={handleChange}
+          onChange={handleChange} />
+        {errors.firstName && <div className="error">{errors.firstName}</div>}
+
+        <label>Last Name</label>
+        <input type="text" name="lastName" value={inputs.lastName}
+          onFocus={handleChange}
+          onChange={handleChange} />
+        {errors.lastName && <div className="error">{errors.lastName}</div>}
+
+        <label>Email</label>
+        <input type="text" name="email" value={inputs.email}
+          onFocus={handleChange}
+          onChange={handleChange}/>
+        {errors.email && <div className="error">{errors.email}</div>}
+
+        <div style={{width: '300px'}}>
+          <button disabled={!isValid()}>Submit</button>
+          <button onClick={clear}>Clear</button>
+        </div>
+      </div>
     </div>
   );
 }
